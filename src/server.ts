@@ -223,5 +223,3 @@ if (!localStorage.getItem("history")) {
 
 (JSON.parse(localStorage.getItem("history") ?? "null") as Cell[]).forEach(c=>mkcell(c.query, c.result))
 
-
-tutorial()
