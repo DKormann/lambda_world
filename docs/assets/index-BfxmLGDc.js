@@ -96,7 +96,7 @@ store(key, value) - stores a value under a key in the server's persistent storag
 load(key) - loads a value from the server's persistent storage
 secret(fn, arg) - calls fn with its own secret fingerprint and the provided argument. this can be used by functions to define or share private state in a finegrained manner.
 `,""),J('a(proc(x=>store("hello", x)), "world") // this will store at the global server for all to see'),J('a(proc(x=>load("hello")), 0) // this will load the value we just stored'),J(`proc((privkey, arg)=>{
-  let ctr = load("counter")
-  store("counter", ctr + 1)
+  let ctr = load([privkey, "counter"])
+  store([privkey, "counter"], ctr + 1)
   return "people called this tutorial "  + ctr + " times before"
 })//construct a global counter function`),J("a(secret, v[5], 0) // this is how to call a proc with secret provided.","")};Sn.onkeydown=e=>{e.metaKey&&e.key=="k"&&(sr(),J("",""))};let Ot=Ut(Mt(),{whiteSpace:"pre",paddingTop:"20px"}),ut=[];Sn.append(Mt(qa("λ🌎 lambada"),Er(sr,"Reset"),Er(Bn,"Tutorial"),ae("a")(ae("button")("source"),{href:"https://github.com/dkormann/pragmatic_lambda"}),Ot));localStorage.getItem("history")||localStorage.setItem("history",JSON.stringify([{query:"",result:""}]));JSON.parse(localStorage.getItem("history")??"null").forEach(e=>J(e.query,e.result));Bn();

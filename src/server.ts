@@ -178,8 +178,8 @@ mkcell(`a(proc(x=>load("hello")), 0) // this will load the value we just stored`
 
 
 mkcell(`proc((privkey, arg)=>{
-  let ctr = load("counter")
-  store("counter", ctr + 1)
+  let ctr = load([privkey, "counter"])
+  store([privkey, "counter"], ctr + 1)
   return "people called this tutorial "  + ctr + " times before"
 })//construct a global counter function`)
 
@@ -212,13 +212,6 @@ body.append(
     page,
   )
 );
-
-// ((JSON.parse(localStorage.getItem("history") ?? "null") ?? [
-//   {
-//     query: "22",
-//     result: "22"
-//   }
-// ]) as Cell[]).forEach(c=>mkcell(c.query, c.result))
 
 
 if (!localStorage.getItem("history")) {
