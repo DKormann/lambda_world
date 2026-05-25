@@ -1,0 +1,17 @@
+{
+  "name": "pragmatic_lambda",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "vite": "^7.1.5"
+  },
+  "dependencies": {
+    "spacetimedb": "^2.1.0"
+  }
+}
