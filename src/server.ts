@@ -125,6 +125,7 @@ const mkcell = (content: string, output? : string ) => {
   term.focus()
 
   if (output == undefined) exec()
+  return term
 
 }
 
@@ -140,6 +141,7 @@ const tutorial = () => {
   reset();
   v.length = 0
   page.replaceChildren()
+
 mkcell(`
 
 Welcome to the lambda world interactive tutorial.
@@ -156,7 +158,7 @@ type Term = Dat | Fun | Var | App
 In this notebook environment, user queries get evaluated in JS to create Terms, which are evaluated on the Server.
 first a cell that is just a number:
 `, "");
-mkcell("22 + 11 // try to edit this value and press Enter");
+let st = mkcell("22 + 11 // try to edit this value and press Enter");
 mkcell(`
 There are a few helpers that help construct terms in JS:
 lam: construct a pure lambda
@@ -187,6 +189,8 @@ mkcell(`proc((privkey, arg)=>{
 })//construct a global counter function`)
 
 mkcell(`a(secret, v[5], 0) // this is how to call a proc with secret provided.`, '')
+
+st.focus()
 
 }
 
