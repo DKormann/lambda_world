@@ -31,7 +31,6 @@ type Cell = {
 
 const mkcell = (content: string, output? : string ) => {
 
-  console.log("mkcell", {content, output})
   let hitem = {
     query: content,
     result: output
@@ -91,12 +90,13 @@ const mkcell = (content: string, output? : string ) => {
   }
 
   let exec = () => {
-    console.log("Executing query", term.value)
     setstate(term.value, "")
     try{
+      console.log("Executing query", term.value, v)
       let req = Function(...Object.keys(helps), "return " + term.value)(...Object.values(helps)) as Term
+      console.log("Constructed term", JSON.stringify(req, null, 2))
       send(JSON.stringify(req)).then(res=>{
-        console.log("got response", res)
+        // console.log("got response", res)
         setstate(term.value, res)
       })
     }
@@ -137,7 +137,7 @@ const reset = () => {
 
 const tutorial = () => {
   reset();
-  v = []
+  v.length = 0
   page.replaceChildren()
 mkcell(`
 
@@ -213,12 +213,19 @@ body.append(
   )
 );
 
-((JSON.parse(localStorage.getItem("history") ?? "null") ?? [
-  {
-    query: "22",
-    result: "22"
-  }
-]) as Cell[]).forEach(c=>mkcell(c.query, c.result))
+// ((JSON.parse(localStorage.getItem("history") ?? "null") ?? [
+//   {
+//     query: "22",
+//     result: "22"
+//   }
+// ]) as Cell[]).forEach(c=>mkcell(c.query, c.result))
+
+
+if (!localStorage.getItem("history")) {
+  localStorage.setItem("history", JSON.stringify([{query: "", result: ""}]))
+};
+
+(JSON.parse(localStorage.getItem("history") ?? "null") as Cell[]).forEach(c=>mkcell(c.query, c.result))
 
 
 tutorial()

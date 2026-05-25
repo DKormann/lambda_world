@@ -5,7 +5,7 @@ heavy inspired by [PLAN](https://github.com/xocore-tech/PLAN)
 
 language definition:
 
-````ts
+```ts
 type Dat = string | number | Dat[]
 type Fun = {$fun: [number, "proc", string] | [number, "lam", Term]}
 type Var = {$var: number}
