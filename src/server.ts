@@ -8,6 +8,7 @@ let send = await new Promise<(query:string)=>Promise<string>>((rs,rj)=>{
   DbConnection.builder()
 
   .withUri("wss://maincloud.spacetimedb.com/lexxtract")
+  // .withUri("ws://localhost:3000/lexxtract")
 
   .withDatabaseName("pragmatic-lambda")
   .onConnect((c, i, t)=>{
@@ -157,10 +158,12 @@ first a cell that is just a number:
 `, "");
 mkcell("22 + 11 // try to edit this value and press Enter");
 mkcell(`
-There are 3 helpers that help construct terms in JS:
-lam: construct a pure lambda,
-proc: construct a procedure,
-a: construct an application.`,'')
+There are a few helpers that help construct terms in JS:
+lam: construct a pure lambda
+proc: construct a procedure
+a: construct an application
+v: an array of previous results
+`,'')
 mkcell(`lam((x,y) => x) // here we create a lambda. the result gets pretty printed and stored in the v array. You can reference it results in the v array in future calls.`)
 mkcell(`proc(x=>x+1) // procedures are allowed to use full JS syntax internally but they are limited in accessing global variables.`)
 mkcell(`a(v[2], 41) // using a we construct a call to the previous procedure. press Enter here to run this cell`, "")
@@ -205,7 +208,7 @@ let hist: Cell[] = [];
 
 body.append(
   div(
-    h1("λ🌎 lambada"),
+    h1("λ🌎"),
     button(reset, "Reset"),
     button(tutorial, "Tutorial"),
     html("a")( html("button")("source"), {href: "https://github.com/dkormann/pragmatic_lambda"}),

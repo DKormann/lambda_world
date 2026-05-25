@@ -86,10 +86,12 @@ type Term = Dat | Fun | Var | App
 In this notebook environment, user queries get evaluated in JS to create Terms, which are evaluated on the Server.
 first a cell that is just a number:
 `,""),J("22 + 11 // try to edit this value and press Enter"),J(`
-There are 3 helpers that help construct terms in JS:
-lam: construct a pure lambda,
-proc: construct a procedure,
-a: construct an application.`,""),J("lam((x,y) => x) // here we create a lambda. the result gets pretty printed and stored in the v array. You can reference it results in the v array in future calls."),J("proc(x=>x+1) // procedures are allowed to use full JS syntax internally but they are limited in accessing global variables."),J("a(v[2], 41) // using a we construct a call to the previous procedure. press Enter here to run this cell",""),J(`
+There are a few helpers that help construct terms in JS:
+lam: construct a pure lambda
+proc: construct a procedure
+a: construct an application
+v: an array of previous results
+`,""),J("lam((x,y) => x) // here we create a lambda. the result gets pretty printed and stored in the v array. You can reference it results in the v array in future calls."),J("proc(x=>x+1) // procedures are allowed to use full JS syntax internally but they are limited in accessing global variables."),J("a(v[2], 41) // using a we construct a call to the previous procedure. press Enter here to run this cell",""),J(`
 There are 3 builtin methods to create global effects:
 
 store(key, value) - stores a value under a key in the server's persistent storage
@@ -99,4 +101,4 @@ secret(fn, arg) - calls fn with its own secret fingerprint and the provided argu
   let ctr = load([privkey, "counter"])
   store([privkey, "counter"], ctr + 1)
   return "people called this tutorial "  + ctr + " times before"
-})//construct a global counter function`),J("a(secret, v[5], 0) // this is how to call a proc with secret provided.","")};Sn.onkeydown=e=>{e.metaKey&&e.key=="k"&&(sr(),J("",""))};let Ot=Ut(Mt(),{whiteSpace:"pre",paddingTop:"20px"}),ut=[];Sn.append(Mt(qa("λ🌎 lambada"),Er(sr,"Reset"),Er(Bn,"Tutorial"),ae("a")(ae("button")("source"),{href:"https://github.com/dkormann/pragmatic_lambda"}),Ot));localStorage.getItem("history")||localStorage.setItem("history",JSON.stringify([{query:"",result:""}]));JSON.parse(localStorage.getItem("history")??"null").forEach(e=>J(e.query,e.result));Bn();
+})//construct a global counter function`),J("a(secret, v[5], 0) // this is how to call a proc with secret provided.","")};Sn.onkeydown=e=>{e.metaKey&&e.key=="k"&&(sr(),J("",""))};let Ot=Ut(Mt(),{whiteSpace:"pre",paddingTop:"20px"}),ut=[];Sn.append(Mt(qa("λ🌎"),Er(sr,"Reset"),Er(Bn,"Tutorial"),ae("a")(ae("button")("source"),{href:"https://github.com/dkormann/pragmatic_lambda"}),Ot));localStorage.getItem("history")||localStorage.setItem("history",JSON.stringify([{query:"",result:""}]));JSON.parse(localStorage.getItem("history")??"null").forEach(e=>J(e.query,e.result));Bn();
