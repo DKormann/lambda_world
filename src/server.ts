@@ -59,6 +59,7 @@ const mkcell = (content: string, output? : string ) => {
   }
 
   let term = html("textarea")({rows: 1, cols: 50}) as HTMLTextAreaElement;
+  style(term, {color: "var(--color)"})
   let outview = p()
 
   style(term, {
