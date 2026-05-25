@@ -32,19 +32,20 @@ type Cell = {
 
 const mkcell = (content: string, output? : string ) => {
 
+  console.log("MKCELL:",{content})
+
   let hitem = {
     query: content,
     result: output
   } as Cell
 
   hist.push(hitem)
-  let c = hist.length
-
+  // let c = hist.length
 
   let setstate = (query: string, result: string) => {
     hitem.query = query
     hitem.result = result
-    localStorage.setItem("history", JSON.stringify(hist.slice(-50)))
+    localStorage.setItem("history", JSON.stringify(hist))
     term.value = query
     term.rows = term.value.split("\n").length
 
@@ -85,7 +86,7 @@ const mkcell = (content: string, output? : string ) => {
       }else{
         e.preventDefault();
         exec()
-        if (c == hist.length) mkcell("", "")
+        // if (c == hist.length) mkcell("", "").focus()
 
       }
     }
@@ -123,8 +124,6 @@ const mkcell = (content: string, output? : string ) => {
   })
   page.append(cell)
 
-  term.focus()
-
   if (output == undefined) exec()
   return term
 
@@ -139,7 +138,8 @@ const reset = () => {
 }
 
 const tutorial = () => {
-  reset();
+  page.replaceChildren()
+  hist = []
   v.length = 0
   page.replaceChildren()
 
@@ -191,7 +191,7 @@ mkcell(`proc((privkey, arg)=>{
 
 mkcell(`a(secret, v[5], 0) // this is how to call a proc with secret provided.`, '')
 
-st.focus()
+page.scrollBy({top: 9999, behavior: "smooth"})
 
 }
 
@@ -223,8 +223,12 @@ body.append(
 
 
 if (!localStorage.getItem("history")) {
-  localStorage.setItem("history", JSON.stringify([{query: "", result: ""}]))
+  localStorage.setItem("history", JSON.stringify([
+    {query: "", result: ""}
+  ]))
 };
 
-(JSON.parse(localStorage.getItem("history") ?? "null") as Cell[]).forEach(c=>mkcell(c.query, c.result))
+(JSON.parse(localStorage.getItem("history") ?? "null") as Cell[]).forEach(c=>{
+  console.log("LOADED", c)
+  mkcell(c.query, c.result)})
 
